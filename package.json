@@ -1,0 +1,12 @@
+{
+  "name": "snowvixa-labs",
+  "version": "1.0.0",
+  "description": "Snowvixa Labs landing with backend",
+  "scripts": {
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "@resend/node": "^3.2.0",
+    "stripe": "^14.0.0"
+  }
+}
