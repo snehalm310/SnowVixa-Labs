@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Services Catalogue | Snowvixa Labs - Custom AI Agents & Automation</title>
+    <meta name="description" content="Explore 9 done-for-you AI services: Custom GPT agents, workflow automation, AI SDR systems, content engines, and more. Built for SaaS, D2C & coaches.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --icy-blue: #7DF9FF;
+            --neon-pink: #FF10F0;
+            --black: #0A0A0F;
+            --glass: rgba(255,255,255,0.05);
+            --glass-border: rgba(125,249,255,0.2);
+            --text: #FFFFFF;
+            --text-muted: #A0A0B0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background: var(--black); 
+            color: var(--text); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(125,249,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,16,240,0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+        .section { padding: 100px 0; }
+        .section-title { font-size: 3rem; font-weight: 700; text-align: center; margin-bottom: 16px; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 60px; font-size: 1.2rem; }
+        .text-icy { color: var(--icy-blue); }
+        .text-pink { color: var(--neon-pink); }
+        
+        /* Nav */
+        .navbar { 
+            position: fixed; top: 0; width: 100%; 
+            background: rgba(10,10,15,0.8); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000; padding: 20px 0;
+        }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo-link { display: block; }
+        .nav-logo { height: 40px; display: block; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-link { color: var(--text); text-decoration: none; transition: color 0.3s; }
+        .nav-link:hover { color: var(--icy-blue); }
+        .nav-link.active { color: var(--icy-blue); }
+        
+        /* Buttons */
+        .btn-primary, .btn-secondary {
+            padding: 14px 28px; border-radius: 8px; text-decoration: none; 
+            font-weight: 500; transition: all 0.3s; border: none; cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif; font-size: 1rem; display: inline-block;
+        }
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--icy-blue), var(--neon-pink)); 
+            color: var(--black); box-shadow: 0 0 20px rgba(125,249,255,0.4);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(125,249,255,0.6); }
+        .btn-secondary { 
+            background: var(--glass); color: var(--text); 
+            border: 1px solid var(--glass-border);
+        }
+        .btn-secondary:hover { background: rgba(125,249,255,0.1); border-color: var(--icy-blue); }
+        
+        /* Hero */
+        .page-hero { padding: 180px 0 60px; text-align: center; }
+        .page-hero h1 { font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 24px; }
+        .breadcrumb { color: var(--text-muted); margin-bottom: 20px; }
+        .breadcrumb a { color: var(--icy-blue); text-decoration: none; }
+        
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass); backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border); border-radius: 16px; padding: 40px;
+            transition: all 0.3s;
+        }
+        .glass-card:hover { border-color: var(--icy-blue); transform: translateY(-5px); box-shadow: 0 10px 40px rgba(125,249,255,0.2); }
+        
+        /* Service Detail Cards */
+        .service-detail { margin-bottom: 80px; scroll-margin-top: 100px; }
+        .service-header { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
+        .service-icon { font-size: 3rem; }
+        .service-detail h2 { font-size: 2.5rem; color: var(--icy-blue); }
+        .service-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; align-items: start; }
+        .service-content h3 { font-size: 1.3rem; margin: 24px 0 12px; color: var(--text); }
+        .service-content ul { list-style: none; margin-left: 0; }
+        .service-content ul li { padding: 8px 0; padding-left: 24px; position: relative; }
+        .service-content ul li:before { content: '→'; color: var(--icy-blue); position: absolute; left: 0; font-weight: 700; }
+        .service-meta { position: sticky; top: 120px; }
+        .meta-box { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; padding: 24px; margin-bottom: 20px; }
+        .meta-box h4 { color: var(--neon-pink); margin-bottom: 12px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        .meta-box p { color: var(--text-muted); font-size: 0.95rem; }
+        
+        /* Footer */
+        .footer { border-top: 1px solid var(--glass-border); padding: 60px 0 30px; margin-top: 100px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-logo-link { display: inline-block; }
+        .footer-logo { height: 40px; margin-bottom: 16px; display: block; }
+        .footer-links h4 { margin-bottom: 16px; color: var(--icy-blue); }
+        .footer-links a { display: block; color: var(--text-muted); text-decoration: none; margin-bottom: 10px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--text); }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid var(--glass-border); color: var(--text-muted); }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero h1 { font-size: 2.5rem; }
+            .service-grid { grid-template-columns: 1fr; }
+            .service-meta { position: relative; top: 0; }
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <a href="./index.html" class="nav-logo-link">
+                <img src="./logo.jpeg" alt="Snowvixa Labs" class="nav-logo">
+            </a>
+            <div class="nav-links">
+                <a href="./index.html#why" class="nav-link">Why Us</a>
+                <a href="./services.html" class="nav-link active">Services</a>
+                <a href="./index.html#case-studies" class="nav-link">Case Studies</a>
+                <a href="./index.html#pricing" class="nav-link">Pricing</a>
+                <a href="./index.html#blog" class="nav-link">Blog</a>
+                <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary">Book Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb"><a href="./index.html">Home</a> / Services</div>
+            <h1>AI <span class="text-icy">Services</span> Catalogue</h1>
+            <p class="section-subtitle">9 done-for-you systems to automate ops, content, and revenue. Pick one or bundle them.</p>
+        </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            
+            <!-- Service 1 -->
+            <div id="ai-content-engine" class="service-detail">
+                <div class="service-header">
+                    <div class="service-icon">📝</div>
+                    <h2>AI Content Engine</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-content glass-card">
+                        <p><strong>Turn 1 idea into 30 pieces of content.</strong> We train GPT-4 on your past blogs, videos, and brand voice. Then build an automated pipeline that creates blogs, LinkedIn posts, Twitter threads, email newsletters, and YouTube scripts — all from one input.</p>
+                        
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>Custom fine-tuned GPT trained on your content + industry data</li>
+                            <li>Automated workflow: Notion → AI → Buffer/Hootsuite → Auto-publish</li>
+                            <li>SEO optimization + keyword clustering built-in</li>
+                            <li>UGC video script generator for TikTok/Reels</li>
+                            <li>Weekly content calendar auto-filled 30 days ahead</li>
+                        </ul>
+
+                        <h3>Best For:</h3>
+                        <p>SaaS founders, coaches, and D2C brands doing 2-4 posts/week who want to scale to 20+ without hiring writers.</p>
+
+                        <h3>Tech Stack:</h3>
+                        <p>OpenAI GPT-4, Claude, LangChain, Make.com, Notion API, Buffer, Surfer SEO</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="meta-box">
+                            <h4>Timeline</h4>
+                            <p>7 days to first content live</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Typical ROI</h4>
+                            <p>10x content output<br>+40% organic traffic in 90 days</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Pricing</h4>
+                            <p>Variable depending on your needs and scope</p>
+                            <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 16px;">Book Call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div id="sales-agents" class="service-detail">
+                <div class="service-header">
+                    <div class="service-icon">🤖</div>
+                    <h2>Sales & Support Agents</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-content glass-card">
+                        <p><strong>24/7 AI rep that qualifies leads and handles L1 support.</strong> We build custom chatbots trained on your docs, past tickets, and sales calls. Answers questions, books demos via Calendly, and routes hot leads to Slack.</p>
+                        
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>GPT-4 chatbot trained on 50k+ tokens of your data</li>
+                            <li>HubSpot/Salesforce integration — creates deals + contacts automatically</li>
+                            <li>Calendly booking + Slack alerts for qualified leads</li>
+                            <li>Multi-language support + brand voice matching</li>
+                            <li>Escalation logic: knows when to hand off to human</li>
+                        </ul>
+
+                        <h3>Best For:</h3>
+                        <p>B2B SaaS and service businesses with 100+ inbound leads/month who need instant response time.</p>
+
+                        <h3>Tech Stack:</h3>
+                        <p>OpenAI Assistants API, Pinecone, LangChain, HubSpot, Intercom, Slack</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="meta-box">
+                            <h4>Timeline</h4>
+                            <p>10 days to deployment</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Typical ROI</h4>
+                            <p>22 hrs/week saved<br>CSAT up 18%</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Pricing</h4>
+                            <p>Variable depending on your needs and scope</p>
+                            <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 16px;">Book Call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div id="workflow-automation" class="service-detail">
+                <div class="service-header">
+                    <div class="service-icon">⚙️</div>
+                    <h2>Workflow Automation</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-content glass-card">
+                        <p><strong>Connect your entire stack. Eliminate manual data entry forever.</strong> We audit your ops, then build automations between Notion, Airtable, Slack, HubSpot, Stripe, and 100+ other tools. If it has an API, we can connect it.</p>
+                        
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>Ops audit: We map all manual workflows costing you time</li>
+                            <li>Custom Zapier/Make.com workflows with error handling</li>
+                            <li>API integrations for tools without native connectors</li>
+                            <li>Auto-reporting: Weekly Slack/Email summaries of key metrics</li>
+                            <li>Documentation + Loom videos so your team can maintain it</li>
+                        </ul>
+
+                        <h3>Best For:</h3>
+                        <p>Ops-heavy businesses juggling 5+ tools. If you’re copy-pasting between apps, this is for you.</p>
+
+                        <h3>Tech Stack:</h3>
+                        <p>Zapier, Make.com, Airtable, Notion API, Stripe API, Python scripts</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="meta-box">
+                            <h4>Timeline</h4>
+                            <p>5 days per workflow</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Typical ROI</h4>
+                            <p>20+ hrs/week saved<br>$2k+/mo in labor</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Pricing</h4>
+                            <p>Variable depending on your needs and scope</p>
+                            <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 16px;">Book Call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div id="ai-sdr" class="service-detail">
+                <div class="service-header">
+                    <div class="service-icon">🎯</div>
+                    <h2>AI SDR Systems</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-content glass-card">
+                        <p><strong>Cold outbound that books calls while you sleep.</strong> AI researches prospects, writes personalized emails/LinkedIn DMs, follows up, and books meetings on your calendar. Sounds human, converts 3-8%.</p>
+                        
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>Clay.com setup for enrichment + AI personalization at scale</li>
+                            <li>Instantly.ai or Smartlead cold email infrastructure</li>
+                            <li>LinkedIn automation via PhantomBuster + GPT-4 personalization</li>
+                            <li>Auto-replies handled by AI → books calls or nurtures</li>
+                            <li>Weekly report: replies, meetings booked, pipeline added</li>
+                        </ul>
+
+                        <h3>Best For:</h3>
+                        <p>B2B companies with ACV $3k+. Need 20+ qualified calls/month without hiring SDRs.</p>
+
+                        <h3>Tech Stack:</h3>
+                        <p>Clay, Instantly, Smartlead, PhantomBuster, GPT-4, HubSpot</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="meta-box">
+                            <h4>Timeline</h4>
+                            <p>14 days to first campaign</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Typical ROI</h4>
+                            <p>15-30 meetings/mo<br>$50k+ pipeline</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Pricing</h4>
+                            <p>Variable depending on your needs and scope</p>
+                            <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 16px;">Book Call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div id="custom-ai-dev" class="service-detail">
+                <div class="service-header">
+                    <div class="service-icon">🧬</div>
+                    <h2>Custom AI Development</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-content glass-card">
+                        <p><strong>Your data is your moat. We build proprietary AI on top of it.</strong> Fine-tuned models, RAG systems, internal tools, and AI features for your SaaS product. You own the IP.</p>
+                        
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>Fine-tuned LLM on your proprietary data</li>
+                            <li>RAG systems: Chat with your docs, Notion, PDFs</li>
+                            <li>Custom AI features for your SaaS app</li>
+                            <li>Vector database setup + maintenance</li>
+                            <li>Model evaluation + continuous improvement</li>
+                        </ul>
+
+                        <h3>Best For:</h3>
+                        <p>SaaS companies wanting AI moats, or enterprises with sensitive data that can’t use ChatGPT.</p>
+
+                        <h3>Tech Stack:</h3>
+                        <p>OpenAI, Anthropic, LangChain, Pinecone, Weaviate, Python, FastAPI</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="meta-box">
+                            <h4>Timeline</h4>
+                            <p>4-8 weeks MVP</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Typical ROI</h4>
+                            <p>Defensible moat<br>New revenue line</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Pricing</h4>
+                            <p>Variable depending on your needs and scope</p>
+                            <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 16px;">Book Call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div id="social-automation" class="service-detail">
+                <div class="service-header">
+                    <div class="service-icon">📱</div>
+                    <h2>Social Media Automation</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-content glass-card">
+                        <p><strong>Turn 1 long-form video into 30 posts. Auto-post, auto-engage.</strong> AI clips your podcasts/YouTube, writes captions, designs thumbnails, schedules posts, and replies to comments in your voice.</p>
+                        
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>Video clipping: 1 podcast → 15 Reels/TikToks/Shorts</li>
+                            <li>Caption + hashtag generation trained on your top posts</li>
+                            <li>Auto-schedule to IG, LinkedIn, TikTok, X, YouTube</li>
+                            <li>AI comment replies that match your tone</li>
+                            <li>Trend detection: AI tells you what to post next</li>
+                        </ul>
+
+                        <h3>Best For:</h3>
+                        <p>Personal brands, coaches, and D2C brands who need daily posting but hate content creation.</p>
+
+                        <h3>Tech Stack:</h3>
+                        <p>Opus Clip, Taplio, Hypefury, Buffer, GPT-4 Vision</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="meta-box">
+                            <h4>Timeline</h4>
+                            <p>7 days to first posts</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Typical ROI</h4>
+                            <p>30 posts/week<br>3x reach in 60 days</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Pricing</h4>
+                            <p>Variable depending on your needs and scope</p>
+                            <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 16px;">Book Call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 7 -->
+            <div id="ecommerce-ai" class="service-detail">
+                <div class="service-header">
+                    <div class="service-icon">🛒</div>
+                    <h2>E-commerce AI</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-content glass-card">
+                        <p><strong>AI for your Shopify/Amazon store.</strong> Auto-generate product descriptions, respond to reviews, optimize pricing, and predict inventory. Built to increase AOV and reduce support tickets.</p>
+                        
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>Product description generator: SEO-optimized, on-brand</li>
+                            <li>AI review responses: Handles negative reviews 24/7</li>
+                            <li>Dynamic pricing: AI adjusts prices based on demand/competitors</li>
+                            <li>Inventory alerts: Predict stockouts before they happen</li>
+                            <li>Abandoned cart SMS/Email flows with AI personalization</li>
+                        </ul>
+
+                        <h3>Best For:</h3>
+                        <p>D2C brands doing $10k+/mo with 50+ SKUs who want to automate operations.</p>
+
+                        <h3>Tech Stack:</h3>
+                        <p>Shopify API, Amazon SP-API, Klaviyo, GPT-4, Python</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="meta-box">
+                            <h4>Timeline</h4>
+                            <p>10 days to live</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Typical ROI</h4>
+                            <p>+15% conversion<br>80% fewer tickets</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Pricing</h4>
+                            <p>Variable depending on your needs and scope</p>
+                            <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 16px;">Book Call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 8 -->
+            <div id="data-analytics" class="service-detail">
+                <div class="service-header">
+                    <div class="service-icon">📊</div>
+                    <h2>Data & Analytics AI</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-content glass-card">
+                        <p><strong>Ask your data questions in plain English.</strong> Connect all your data sources — Stripe, HubSpot, GA4, Shopify — and chat with it. AI generates dashboards, finds insights, and emails weekly reports.</p>
+                        
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>Text-to-SQL: Ask "What was MRR last month?" get answer + chart</li>
+                            <li>Auto-dashboard creation in Looker/Metabase</li>
+                            <li>Anomaly detection: AI alerts you to revenue drops/churn spikes</li>
+                            <li>Weekly AI-generated insights email to your team</li>
+                            <li>Connects 100+ data sources via Fivetran/Airbyte</li>
+                        </ul>
+
+                        <h3>Best For:</h3>
+                        <p>Founders and ops teams drowning in spreadsheets who need answers fast.</p>
+
+                        <h3>Tech Stack:</h3>
+                        <p>LangChain, SQL, Metabase, Looker, BigQuery, Fivetran</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="meta-box">
+                            <h4>Timeline</h4>
+                            <p>14 days to first dashboard</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Typical ROI</h4>
+                            <p>5 hrs/week saved<br>Faster decisions</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Pricing</h4>
+                            <p>Variable depending on your needs and scope</p>
+                            <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 16px;">Book Call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 9 -->
+            <div id="gtm-systems" class="service-detail">
+                <div class="service-header">
+                    <div class="service-icon">🚀</div>
+                    <h2>GTM & Launch Systems</h2>
+                </div>
+                <div class="service-grid">
+                    <div class="service-content glass-card">
+                        <p><strong>Product Hunt #1, Reddit front page, SEO traffic — automated.</strong> We build launch playbooks that coordinate PR, influencers, SEO, and community in one push. Used by 20+ startups.</p>
+                        
+                        <h3>What You Get:</h3>
+                        <ul>
+                            <li>Product Hunt launch: AI writes copy, coordinates hunters, automates DMs</li>
+                            <li>Reddit/Twitter seeding: AI finds relevant threads + drafts replies</li>
+                            <li>SEO cluster: 50 blog posts auto-generated + interlinked</li>
+                            <li>PR outreach: AI personalizes pitches to 500+ journalists</li>
+                            <li>Launch dashboard: Track signups, traffic, mentions in real-time</li>
+                        </ul>
+
+                        <h3>Best For:</h3>
+                        <p>SaaS and D2C brands launching new products who need Day 1 traction.</p>
+
+                        <h3>Tech Stack:</h3>
+                        <p>GPT-4, Ahrefs API, Hunter.io, PhantomBuster, Notion</p>
+                    </div>
+                    <div class="service-meta">
+                        <div class="meta-box">
+                            <h4>Timeline</h4>
+                            <p>21 days prep</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Typical ROI</h4>
+                            <p>10k+ visitors<br>500+ signups Day 1</p>
+                        </div>
+                        <div class="meta-box">
+                            <h4>Pricing</h4>
+                            <p>Variable depending on your needs and scope</p>
+                            <a href="https://calendly.com/admin-snowvixalabs/30min" target="_blank" class="btn-primary" style="width: 100%; text-align: center; margin-top: 16px;">Book Call</a>
+                       
