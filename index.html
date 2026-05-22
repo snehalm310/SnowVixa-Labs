@@ -6,11 +6,12 @@
     <title>Snowvixa Labs - Build smart. Scale faster.</title>
     <meta name="description" content="AI consulting, automation & custom development for global clients. Done-for-you AI agents, workflows & GTM systems.">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-        <!-- Favicon -->
-       
-    <link rel="icon" type="image/jpeg" href="./Favicon.jpeg">
-    <link rel="apple-touch-icon" href="./Favicon.jpeg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="./logo.jpeg">
+    <link rel="apple-touch-icon" href="./logo.jpeg">
     <meta name="theme-color" content="#0A0A0F">
+    
     <style>
         :root {
             --icy-blue: #7DF9FF;
@@ -22,69 +23,59 @@
             --text-muted: #A0A0B0;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-       body { 
-    font-family: 'Space Grotesk', sans-serif; 
-    background: var(--black); 
-    color: var(--text); 
-    line-height: 1.6;
-    overflow-x: hidden;
-}
-body::before {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(135deg, #0A0A0F 0%, #0F1A2E 25%, #1A0F2E 50%, #0A0A0F 100%);
-    pointer-events: none;
-    z-index: 0;
-}
-body::after {
-    content: '';
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: radial-gradient(circle at 20% 20%, rgba(125,249,255,0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(255,16,240,0.12) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(125,249,255,0.08) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-}
-/* Snow particles */
-.snow {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    pointer-events: none;
-    z-index: 1;
-}
-.snowflake {
-    position: absolute;
-    width: 4px; height: 4px;
-    background: var(--icy-blue);
-    border-radius: 50%;
-    opacity: 0.6;
-    animation: fall linear infinite;
-    box-shadow: 0 0 6px var(--icy-blue);
-}
-@keyframes fall {
-    to { transform: translateY(100vh) translateX(50px); opacity: 0; }
-}
-.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
-.section { padding: 100px 0; }
-.section-title { font-size: 3rem; font-weight: 700; text-align: center; margin-bottom: 16px; }
-.section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 60px; font-size: 1.2rem; }
-.text-icy { color: var(--icy-blue); }
-.text-pink { color: var(--neon-pink); }
-.text-muted { color: var(--text-muted); font-size: 0.9rem; }
-
-/* Nav */
-.navbar { 
-    position: fixed; top: 0; width: 100%; 
-    background: rgba(10,10,15,0.8); backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--glass-border);
-    z-index: 1000; padding: 20px 0;
-}
-.nav-flex { display: flex; justify-content: space-between; align-items: center; }
-.nav-logo { height: 60px; transition: transform 0.3s; }
-.nav-logo:hover { transform: scale(1.05); }
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background: var(--black); 
+            color: var(--text); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, #0A0A0F 0%, #0F1A2E 25%, #1A0F2E 50%, #0A0A0F 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(125,249,255,0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(255,16,240,0.12) 0%, transparent 40%),
+                        radial-gradient(circle at 50% 50%, rgba(125,249,255,0.08) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        /* Snow particles */
+        .snow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .snowflake {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: var(--icy-blue);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: fall linear infinite;
+            box-shadow: 0 0 6px var(--icy-blue);
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) translateX(50px); opacity: 0; }
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+        .section { padding: 100px 0; }
+        .section-title { font-size: 3rem; font-weight: 700; text-align: center; margin-bottom: 16px; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 60px; font-size: 1.2rem; }
+        .text-icy { color: var(--icy-blue); }
+        .text-pink { color: var(--neon-pink); }
+        .text-muted { color: var(--text-muted); font-size: 0.9rem; }
+        
         /* Nav */
         .navbar { 
             position: fixed; top: 0; width: 100%; 
@@ -93,7 +84,9 @@ body::after {
             z-index: 1000; padding: 20px 0;
         }
         .nav-flex { display: flex; justify-content: space-between; align-items: center; }
-        .nav-logo { height: 40px; }
+        .nav-logo-link { display: block; }
+        .nav-logo { height: 60px; transition: transform 0.3s; display: block; }
+        .nav-logo:hover { transform: scale(1.05); }
         .nav-links { display: flex; gap: 30px; align-items: center; }
         .nav-link { color: var(--text); text-decoration: none; transition: color 0.3s; }
         .nav-link:hover { color: var(--icy-blue); }
@@ -102,7 +95,7 @@ body::after {
         .btn-primary, .btn-secondary {
             padding: 14px 28px; border-radius: 8px; text-decoration: none; 
             font-weight: 500; transition: all 0.3s; border: none; cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif; font-size: 1rem;
+            font-family: 'Space Grotesk', sans-serif; font-size: 1rem; display: inline-block;
         }
         .btn-primary { 
             background: linear-gradient(135deg, var(--icy-blue), var(--neon-pink)); 
@@ -192,7 +185,8 @@ body::after {
         /* Footer */
         .footer { border-top: 1px solid var(--glass-border); padding: 60px 0 30px; margin-top: 100px; }
         .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-        .footer-logo { height: 40px; margin-bottom: 16px; }
+        .footer-logo-link { display: inline-block; }
+        .footer-logo { height: 60px; margin-bottom: 16px; display: block; }
         .footer-links h4 { margin-bottom: 16px; color: var(--icy-blue); }
         .footer-links a { display: block; color: var(--text-muted); text-decoration: none; margin-bottom: 10px; transition: color 0.3s; }
         .footer-links a:hover { color: var(--text); }
@@ -218,13 +212,12 @@ body::after {
         }
     </style>
 </head>
-    
 <body>
     <nav class="navbar">
         <div class="container nav-flex">
-           <a href="./index.html" class="nav-logo-link">
-    <img src="./logo.jpeg" alt="Snowvixa Labs" class="nav-logo">
-</a>
+            <a href="./index.html" class="nav-logo-link">
+                <img src="./logo.jpeg" alt="Snowvixa Labs" class="nav-logo">
+            </a>
             <div class="nav-links">
                 <a href="#why" class="nav-link">Why Us</a>
                 <a href="./services.html" class="nav-link">Services</a>
@@ -243,7 +236,6 @@ body::after {
             <p class="hero-subtitle">Done-for-you AI agents, automation workflows & GTM systems. We help SaaS, coaches, and D2C brands automate ops, content, and sales — without hiring. Global clients welcome.</p>
             <div class="hero-cta">
                 <a href="#contact" class="btn-primary">Book Free Strategy Call</a>
-                <a href="#case-studies" class="btn-secondary">See Case Studies</a>
                 <a href="./services.html" class="btn-secondary">Explore Services</a>
             </div>
         </div>
@@ -290,6 +282,9 @@ body::after {
                     <h3>Workflow Automation</h3>
                     <p>Connect your stack — Notion, Airtable, Zapier, APIs. Eliminate manual ops between tools.</p>
                 </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="./services.html" class="btn-primary">View All 9 Services →</a>
             </div>
         </div>
     </section>
@@ -363,7 +358,7 @@ body::after {
                     <button class="btn-secondary" data-plan="scale">Get Started</button>
                 </div>
             </div>
-            <p class="pricing-note">Individual service pricing varies based on your needs. Book a free 30-minute strategy call to get a custom quote.</p>
+            <p class="pricing-note">Need custom pricing for enterprise? Book a call and we’ll scope it.</p>
         </div>
     </section>
 
@@ -438,8 +433,8 @@ body::after {
             <div class="footer-grid">
                 <div class="footer-brand">
                     <a href="./index.html" class="footer-logo-link">
-    <img src="./logo.jpeg" alt="Snowvixa Labs" class="footer-logo">
-</a>
+                        <img src="./logo.jpeg" alt="Snowvixa Labs" class="footer-logo">
+                    </a>
                     <p>Build smart. Scale faster.</p>
                     <p class="text-muted">Global clients welcome</p>
                 </div>
@@ -448,7 +443,6 @@ body::after {
                     <a href="#why">About</a>
                     <a href="./services.html">Services</a>
                     <a href="#case-studies">Case Studies</a>
-                    <a href="#blog">Blog</a>
                     <a href="#contact">Contact</a>
                 </div>
                 <div class="footer-links">
@@ -470,8 +464,26 @@ body::after {
     </footer>
 
     <script>
+    // Snow effect
+    function createSnow() {
+        const snowContainer = document.createElement('div');
+        snowContainer.className = 'snow';
+        document.body.appendChild(snowContainer);
+        
+        for (let i = 0; i < 80; i++) {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.animationDuration = (Math.random() * 10 + 5) + 's';
+            snowflake.style.animationDelay = Math.random() * 5 + 's';
+            snowflake.style.width = snowflake.style.height = (Math.random() * 3 + 2) + 'px';
+            snowContainer.appendChild(snowflake);
+        }
+    }
+    createSnow();
+
     // Contact form handler
-    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+    document.getElementById('contactForm')?.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = e.target.querySelector('button');
       const btnText = btn.innerHTML;
@@ -525,7 +537,7 @@ body::after {
           if (data.url) {
             window.location.href = data.url;
           } else {
-            showToast('Stripe error. Email us to get started.', 'error');
+            showToast('Stripe error. Check your Price IDs in Vercel.', 'error');
             btn.innerHTML = originalText;
             btn.disabled = false;
           }
@@ -546,6 +558,5 @@ body::after {
       setTimeout(() => toast.remove(), 4000);
     }
     </script>
- 
 </body>
 </html>
