@@ -1,712 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Snowvixa Labs - AI & Web Innovation Studio</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
-<script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-<style>
-  :root {
-    --bg: #0A0A0F;
-    --icy: #7DF9FF;
-    --pink: #FF10F0;
-    --glass: rgba(255, 255, 255, 0.05);
-    --border: rgba(125, 249, 255, 0.2);
-  }
-  
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-    background: var(--bg);
-  }
-  
-  body {
-    font-family: 'Space Grotesk', sans-serif;
-    background: var(--bg);
-    color: #fff;
-    overflow-x: hidden;
-    position: relative;
-  }
-  
-  /* Morphing Blobs */
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.3;
-    z-index: 0;
-    animation: morph 20s infinite ease-in-out;
-  }
-  
-  .blob-1 {
-    width: 500px;
-    height: 500px;
-    background: var(--icy);
-    top: -200px;
-    left: -200px;
-    animation-delay: 0s;
-  }
-  
-  .blob-2 {
-    width: 400px;
-    height: 400px;
-    background: var(--pink);
-    bottom: -150px;
-    right: -150px;
-    animation-delay: 5s;
-  }
-  
-  .blob-3 {
-    width: 350px;
-    height: 350px;
-    background: linear-gradient(135deg, var(--icy), var(--pink));
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation-delay: 10s;
-  }
-  
-  @keyframes morph {
-    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(0, 0) scale(1); }
-    25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; transform: translate(50px, -30px) scale(1.1); }
-    50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; transform: translate(-20px, 40px) scale(0.9); }
-    75% { border-radius: 60% 40% 60% 40% / 70% 30% 50% 60%; transform: translate(30px, 20px) scale(1.05); }
-  }
-  
-  /* Glassmorphism */
-  .glass {
-    background: var(--glass);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--border);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
-  }
-  
-  .glass-hover {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  
-  .glass-hover:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--icy);
-    transform: translateY(-8px);
-    box-shadow: 0 16px 48px 0 rgba(125, 249, 255, 0.15);
-  }
-  
-  /* Gradient Text */
-  .gradient-text {
-    background: linear-gradient(135deg, var(--icy), var(--pink));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  
-  /* Gradient Border */
-  .gradient-border {
-    position: relative;
-    background: var(--bg);
-    border-radius: 1rem;
-  }
-  
-  .gradient-border::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 1rem;
-    padding: 2px;
-    background: linear-gradient(135deg, var(--icy), var(--pink));
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-  
-  /* Nav Link */
-  .nav-link {
-    position: relative;
-    transition: color 0.3s;
-  }
-  
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--icy), var(--pink));
-    transition: width 0.3s ease;
-  }
-  
-  .nav-link:hover::after {
-    width: 100%;
-  }
-  
-  /* Button Styles */
-  .btn-primary {
-    background: linear-gradient(135deg, var(--icy), var(--pink));
-    color: var(--bg);
-    font-weight: 600;
-    transition: all 0.3s;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(125, 249, 255, 0.4);
-  }
-  
-  .btn-primary:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-  
-  .btn-secondary {
-    background: transparent;
-    border: 2px solid var(--icy);
-    color: var(--icy);
-    font-weight: 600;
-    transition: all 0.3s;
-  }
-  
-  .btn-secondary:hover {
-    background: var(--icy);
-    color: var(--bg);
-    box-shadow: 0 10px 30px rgba(125, 249, 255, 0.3);
-  }
-  
-  /* Input Styles */
-  .input-glass {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(125, 249, 255, 0.2);
-    transition: all 0.3s;
-  }
-  
-  .input-glass:focus {
-    outline: none;
-    border-color: var(--icy);
-    background: rgba(255, 255, 255, 0.05);
-    box-shadow: 0 0 0 3px rgba(125, 249, 255, 0.1);
-  }
-  
-  /* Spinner */
-  .spinner {
-    border: 2px solid rgba(10, 10, 15, 0.3);
-    border-top: 2px solid var(--bg);
-    border-radius: 50%;
-    width: 16px;
-    height: 16px;
-    animation: spin 0.8s linear infinite;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  /* Toast */
-  .toast {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    padding: 16px 24px;
-    background: var(--glass);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-    transform: translateX(400px);
-    opacity: 0;
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 1000;
-    max-width: 350px;
-  }
-  
-  .toast.show {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  
-  .toast.success {
-    border-color: var(--icy);
-  }
-  
-  .toast.error {
-    border-color: var(--pink);
-  }
-  
-  /* Animations */
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .fade-in-up {
-    animation: fadeInUp 0.8s ease-out forwards;
-  }
-  
-  /* Hamburger */
-  .hamburger span {
-    display: block;
-    height: 2px;
-    background: #fff;
-    border-radius: 2px;
-    transition: all 0.3s;
-  }
-  
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-  }
-  
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snowvixa Labs - Build smart. Scale faster.</title>
+    <meta name="description" content="AI consulting, automation & custom development for global clients. Done-for-you AI agents, workflows & GTM systems.">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --icy-blue: #7DF9FF;
+            --neon-pink: #FF10F0;
+            --black: #0A0A0F;
+            --glass: rgba(255,255,255,0.05);
+            --glass-border: rgba(125,249,255,0.2);
+            --text: #FFFFFF;
+            --text-muted: #A0A0B0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background: var(--black); 
+            color: var(--text); 
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 20% 20%, rgba(125,249,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,16,240,0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 1; }
+        .section { padding: 100px 0; }
+        .section-title { font-size: 3rem; font-weight: 700; text-align: center; margin-bottom: 16px; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 60px; font-size: 1.2rem; }
+        .text-icy { color: var(--icy-blue); }
+        .text-pink { color: var(--neon-pink); }
+        .text-muted { color: var(--text-muted); font-size: 0.9rem; }
+        
+        /* Nav */
+        .navbar { 
+            position: fixed; top: 0; width: 100%; 
+            background: rgba(10,10,15,0.8); backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000; padding: 20px 0;
+        }
+        .nav-flex { display: flex; justify-content: space-between; align-items: center; }
+        .nav-logo { height: 40px; }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-link { color: var(--text); text-decoration: none; transition: color 0.3s; }
+        .nav-link:hover { color: var(--icy-blue); }
+        
+        /* Buttons */
+        .btn-primary, .btn-secondary {
+            padding: 14px 28px; border-radius: 8px; text-decoration: none; 
+            font-weight: 500; transition: all 0.3s; border: none; cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif; font-size: 1rem;
+        }
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--icy-blue), var(--neon-pink)); 
+            color: var(--black); box-shadow: 0 0 20px rgba(125,249,255,0.4);
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(125,249,255,0.6); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-secondary { 
+            background: var(--glass); color: var(--text); 
+            border: 1px solid var(--glass-border);
+        }
+        .btn-secondary:hover { background: rgba(125,249,255,0.1); border-color: var(--icy-blue); }
+        
+        /* Hero */
+        .hero { padding: 180px 0 100px; text-align: center; }
+        .hero-title { font-size: 4.5rem; font-weight: 700; line-height: 1.1; margin-bottom: 24px; }
+        .hero-subtitle { font-size: 1.3rem; color: var(--text-muted); max-width: 700px; margin: 0 auto 40px; }
+        .hero-cta { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .hero-tag { display: inline-block; padding: 8px 16px; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 50px; font-size: 0.9rem; margin-bottom: 24px; }
+        
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass); backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border); border-radius: 16px; padding: 40px;
+            transition: all 0.3s;
+        }
+        .glass-card:hover { border-color: var(--icy-blue); transform: translateY(-5px); box-shadow: 0 10px 40px rgba(125,249,255,0.2); }
+        
+        /* Grid */
+        .grid { display: grid; gap: 30px; }
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        
+        /* Feature Cards */
+        .feature-card { text-align: center; }
+        .feature-icon { font-size: 3rem; margin-bottom: 20px; }
+        .feature-card h3 { font-size: 1.5rem; margin-bottom: 12px; }
+        
+        /* Case Studies */
+        .case-card { position: relative; }
+        .case-stat { 
+            font-size: 3rem; font-weight: 700; 
+            background: linear-gradient(135deg, var(--icy-blue), var(--neon-pink));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+        }
+        .case-card h3 { margin-bottom: 12px; }
+        .case-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+        .case-tags span { 
+            padding: 6px 12px; background: rgba(125,249,255,0.1); 
+            border: 1px solid var(--glass-border); border-radius: 50px; font-size: 0.85rem;
+        }
+        
+        /* Blog */
+        .blog-card { cursor: pointer; }
+        .blog-date { color: var(--icy-blue); font-size: 0.9rem; margin-bottom: 12px; }
+        .blog-card h3 { margin-bottom: 12px; }
+        .link-arrow { color: var(--icy-blue); text-decoration: none; font-weight: 500; }
+        
+        /* Pricing */
+        .pricing-card { text-align: center; position: relative; }
+        .pricing-card.popular { border-color: var(--neon-pink); box-shadow: 0 0 40px rgba(255,16,240,0.3); }
+        .popular-badge { 
+            position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+            background: var(--neon-pink); color: var(--black); padding: 6px 20px;
+            border-radius: 50px; font-size: 0.85rem; font-weight: 700;
+        }
+        .price { font-size: 3.5rem; font-weight: 700; margin: 20px 0; }
+        .price span { font-size: 1.2rem; color: var(--text-muted); }
+        .pricing-features { list-style: none; text-align: left; margin: 30px 0; }
+        .pricing-features li { padding: 12px 0; border-bottom: 1px solid var(--glass-border); }
+        .pricing-features li:before { content: '✓'; color: var(--icy-blue); margin-right: 10px; font-weight: 700; }
+        .pricing-note { font-size: 0.9rem; color: var(--text-muted); margin-top: 40px; text-align: center; }
+        
+        /* Form */
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
+        .form-group input, .form-group textarea {
+            width: 100%; padding: 14px; background: var(--glass); 
+            border: 1px solid var(--glass-border); border-radius: 8px;
+            color: var(--text); font-family: 'Space Grotesk', sans-serif; font-size: 1rem;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none; border-color: var(--icy-blue); box-shadow: 0 0 0 3px rgba(125,249,255,0.1);
+        }
+        
+        /* Footer */
+        .footer { border-top: 1px solid var(--glass-border); padding: 60px 0 30px; margin-top: 100px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-logo { height: 40px; margin-bottom: 16px; }
+        .footer-links h4 { margin-bottom: 16px; color: var(--icy-blue); }
+        .footer-links a { display: block; color: var(--text-muted); text-decoration: none; margin-bottom: 10px; transition: color 0.3s; }
+        .footer-links a:hover { color: var(--text); }
+        .footer-bottom { text-align: center; padding-top: 30px; border-top: 1px solid var(--glass-border); color: var(--text-muted); }
+        
+        /* Toast */
+        .toast { 
+            position: fixed; bottom: 20px; right: 20px; padding: 16px 24px; 
+            border-radius: 8px; color: #fff; z-index: 9999; animation: slideIn 0.3s; 
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .toast.success { background: linear-gradient(135deg, var(--icy-blue), #00D4FF); color: var(--black); }
+        .toast.error { background: var(--neon-pink); }
+        @keyframes slideIn { from { transform: translateX(400px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .section-title { font-size: 2rem; }
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Background Blobs -->
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
-  
-  <!-- Preload images for JS -->
-  <img id="preload-logo" src="./logo.jpeg" hidden alt="">
-  <img id="preload-hero" src="container://./logo.jpeg" hidden alt="">
-  
-  <!-- Toast Notification -->
-  <div id="toast" class="toast">
-    <div class="flex items-start gap-3">
-      <div id="toast-icon"></div>
-      <div>
-        <p id="toast-title" class="font-semibold mb-1"></p>
-        <p id="toast-message" class="text-sm text-gray-300"></p>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Header -->
-  <header class="fixed top-0 w-full z-50 glass">
-    <nav class="container mx-auto px-6 py-4">
-      <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-          <img src="./logo.jpeg" alt="Snowvixa Labs" class="w-10 h-10 rounded-lg object-cover">
-          <span class="text-2xl font-bold gradient-text">Snowvixa Labs</span>
+    <nav class="navbar">
+        <div class="container nav-flex">
+            <img src="./logo.jpeg" alt="Snowvixa Labs" class="nav-logo">
+            <div class="nav-links">
+                <a href="#why" class="nav-link">Why Us</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#case-studies" class="nav-link">Case Studies</a>
+                <a href="#pricing" class="nav-link">Pricing</a>
+                <a href="#blog" class="nav-link">Blog</a>
+                <a href="#contact" class="btn-primary">Book Demo</a>
+            </div>
         </div>
-        
-        <div class="hidden md:flex items-center gap-8">
-          <a href="#services" class="nav-link text-gray-300 hover:text-white">Services</a>
-          <a href="#pricing" class="nav-link text-gray-300 hover:text-white">Pricing</a>
-          <a href="#about" class="nav-link text-gray-300 hover:text-white">About</a>
-          <a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a>
-          <button onclick="openCalendly()" class="btn-secondary px-6 py-2 rounded-lg">
-            Book Demo
-          </button>
-        </div>
-        
-        <button id="mobile-menu-btn" class="md:hidden hamburger w-8 h-8 flex flex-col justify-center gap-1.5">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
-      
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4 space-y-4">
-        <a href="#services" class="block text-gray-300 hover:text-white transition">Services</a>
-        <a href="#pricing" class="block text-gray-300 hover:text-white transition">Pricing</a>
-        <a href="#about" class="block text-gray-300 hover:text-white transition">About</a>
-        <a href="#contact" class="block text-gray-300 hover:text-white transition">Contact</a>
-        <button onclick="openCalendly()" class="btn-secondary px-6 py-2 rounded-lg w-full">
-          Book Demo
-        </button>
-      </div>
     </nav>
-  </header>
-  
-  <!-- Hero Section -->
-  <section class="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="fade-in-up">
-          <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Build The Future<br>
-            <span class="gradient-text">With AI & Web</span>
-          </h1>
-          <p class="text-xl text-gray-400 mb-8 leading-relaxed">
-            Snowvixa Labs crafts cutting-edge digital experiences. From AI automation to immersive web apps, we turn your vision into reality with icy precision.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <button onclick="openCalendly()" class="btn-primary px-8 py-4 rounded-lg text-lg">
-              Start Your Project
-            </button>
-            <a href="#services" class="btn-secondary px-8 py-4 rounded-lg text-lg text-center">
-              Explore Services
-            </a>
-          </div>
-        </div>
-        <div class="relative">
-          <div class="glass rounded-3xl p-2 gradient-border">
-            <img id="hero-img" src="container://./logo.jpeg" alt="Snowvixa Innovation" class="rounded-2xl w-full h-auto">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Services Section -->
-  <section id="services" class="relative py-24">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-4xl md:text-6xl font-bold mb-6">Our <span class="gradient-text">Services</span></h2>
-        <p class="text-xl text-gray-400">14 specialized solutions to accelerate your digital transformation</p>
-      </div>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        <!-- Service Cards -->
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">AI Chatbot Development</h3>
-          <p class="text-gray-400 text-sm">Intelligent conversational AI powered by GPT-4 & custom LLMs</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Web App Development</h3>
-          <p class="text-gray-400 text-sm">Full-stack React, Next.js, Vue applications with perfect UX</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Mobile Development</h3>
-          <p class="text-gray-400 text-sm">Native & cross-platform iOS & Android apps with React Native</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">AI Automation</h3>
-          <p class="text-gray-400 text-sm">Workflow automation, Zapier, Make.com, n8n integrations</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">UI/UX Design</h3>
-          <p class="text-gray-400 text-sm">Figma designs, design systems, user research & prototyping</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">API Development</h3>
-          <p class="text-gray-400 text-sm">REST & GraphQL APIs, microservices, serverless architecture</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Cloud Solutions</h3>
-          <p class="text-gray-400 text-sm">AWS, GCP, Azure deployment, CI/CD, DevOps setup</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Machine Learning</h3>
-          <p class="text-gray-400 text-sm">Custom ML models, computer vision, NLP, data pipelines</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">E-Commerce</h3>
-          <p class="text-gray-400 text-sm">Shopify, Webflow, custom stores, payment integrations</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">CMS Development</h3>
-          <p class="text-gray-400 text-sm">WordPress, Contentful, Sanity, Strapi headless CMS</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Analytics & Dashboard</h3>
-          <p class="text-gray-400 text-sm">Custom dashboards, data viz, GA4, Mixpanel, Amplitude</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Web3 & Blockchain</h3>
-          <p class="text-gray-400 text-sm">Smart contracts, dApps, NFTs, DeFi integration</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">SEO & Growth</h3>
-          <p class="text-gray-400 text-sm">Technical SEO, content strategy, performance optimization</p>
-        </div>
-        
-        <div class="glass glass-hover rounded-2xl p-6">
-          <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center mb-4">
-            <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
-          </div>
-          <h3 class="text-xl font-semibold mb-2">Maintenance & Support</h3>
-          <p class="text-gray-400 text-sm">24/7 monitoring, updates, security patches, ongoing support</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Pricing Section -->
-  <section id="pricing" class="relative py-24">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-4xl md:text-6xl font-bold mb-6">Simple <span class="gradient-text">Pricing</span></h2>
-        <p class="text-xl text-gray-400">Choose the perfect plan to kickstart your innovation</p>
-      </div>
-      
-      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <!-- Starter -->
-        <div class="glass glass-hover rounded-3xl p-8">
-          <div class="text-center mb-8">
-            <h3 class="text-2xl font-bold mb-2">Starter</h3>
-            <p class="text-gray-400 mb-6">Perfect for MVPs & startups</p>
-            <div class="text-5xl font-bold mb-2">
-              $<span class="gradient-text">199</span>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-tag">🚀 AI Consulting for Ambitious Founders</div>
+            <h1 class="hero-title">Build smart.<br><span class="text-icy">Scale faster.</span></h1>
+            <p class="hero-subtitle">Done-for-you AI agents, automation workflows & GTM systems. We help SaaS, coaches, and D2C brands automate ops, content, and sales — without hiring. Global clients welcome.</p>
+            <div class="hero-cta">
+                <a href="#contact" class="btn-primary">Book Free Strategy Call</a>
+                <a href="#case-studies" class="btn-secondary">See Case Studies</a>
             </div>
-            <p class="text-sm text-gray-500">per month</p>
-          </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">1 Service Included</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">Basic Support</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">2 Week Delivery</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">Email Support</span>
-            </li>
-          </ul>
-          <button onclick="handleCheckout('starter')" class="btn-secondary w-full py-3 rounded-lg">
-            Get Started
-          </button>
         </div>
-        
-        <!-- Pro - Featured -->
-        <div class="glass rounded-3xl p-8 relative gradient-border transform md:scale-105">
-          <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-[#7DF9FF] to-[#FF10F0] text-[#0A0A0F] text-sm font-semibold">
-            Most Popular
-          </div>
-          <div class="text-center mb-8">
-            <h3 class="text-2xl font-bold mb-2">Pro</h3>
-            <p class="text-gray-400 mb-6">For growing businesses</p>
-            <div class="text-5xl font-bold mb-2">
-              $<span class="gradient-text">599</span>
+    </section>
+
+    <section id="why" class="section">
+        <div class="container">
+            <h2 class="section-title">Why <span class="text-icy">Snowvixa</span> Labs</h2>
+            <p class="section-subtitle">We're not an agency. We're your AI co-founder.</p>
+            <div class="grid grid-3">
+                <div class="glass-card feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Speed to Value</h3>
+                    <p>Most clients see first automation live in 7 days. No 6-month consulting cycles or $50k retainers.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Custom AI, Not Templates</h3>
+                    <p>We train models on your data, docs, and past wins. Your brand voice, your workflows, your unfair advantage.</p>
+                </div>
+                <div class="glass-card feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>ROI or Refund</h3>
+                    <p>If we don't save you 10+ hours/week or add $5k+ MRR in month 1, you don't pay month 2. Period.</p>
+                </div>
             </div>
-            <p class="text-sm text-gray-500">per month</p>
-          </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">3 Services Included</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">Priority Support</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">1 Week Delivery</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">Slack + Email Support</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">Monthly Strategy Call</span>
-            </li>
-          </ul>
-          <button onclick="handleCheckout('pro')" class="btn-primary w-full py-3 rounded-lg">
-            Get Started
-          </button>
         </div>
-        
-        <!-- Enterprise -->
-        <div class="glass glass-hover rounded-3xl p-8">
-          <div class="text-center mb-8">
-            <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
-            <p class="text-gray-400 mb-6">For large scale operations</p>
-            <div class="text-5xl font-bold mb-2">
-              $<span class="gradient-text">1889</span>
+    </section>
+
+    <section id="services" class="section">
+        <div class="container">
+            <h2 class="section-title">What We <span class="text-pink">Build</span></h2>
+            <p class="section-subtitle">End-to-end AI systems for growth</p>
+            <div class="grid grid-3">
+                <div class="glass-card">
+                    <h3>AI Content Engines</h3>
+                    <p>Automated blog, social, email & video pipelines trained on your expertise. Scale content 10x without hiring creators.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Sales & Support Agents</h3>
+                    <p>Custom GPT chatbots that qualify leads, book calls, and handle L1 support 24/7. Integrated with HubSpot/Slack.</p>
+                </div>
+                <div class="glass-card">
+                    <h3>Workflow Automation</h3>
+                    <p>Connect your stack — Notion, Airtable, Zapier, APIs. Eliminate manual ops between tools.</p>
+                </div>
             </div>
-            <p class="text-sm text-gray-500">per month</p>
-          </div>
-          <ul class="space-y-4 mb-8">
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">All 14 Services</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">Dedicated Team</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">48h Delivery</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">24/7 Support</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 text-[#7DF9FF] flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span class="text-gray-300">Weekly Strategy Calls</span>
-            </li>
-          </ul>
-          <button onclick="handleCheckout('enterprise')" class="btn-secondary w-full py-3 rounded-lg">
-            Contact Sales
-          </button>
         </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- About Section -->
-  <section id="about" class="relative py-24">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="text-4xl md:text-6xl font-bold mb-6">Why <span class="gradient-text">Snowvixa</span>?</h2>
-          <p class="text-xl text-gray-400 mb-8 leading-relaxed">
-            We're not just another dev agency. We're your innovation partners, obsessed with pushing boundaries in AI and web technology.
-          </p>
-          <div class="space-y-6">
-            <div class="flex gap-4">
-              <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-semibold mb-2">Lightning Fast</h3>
-                <p class="text-gray-400">Ship in days, not months. Our agile approach gets you to market faster.</p>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-semibold mb-2">Icy Precision</h3>
-                <p class="text-gray-400">Pixel-perfect execution. We obsess over every detail so you don't have to.</p>
-              </div>
-            </div>
-            <div class="flex gap-4">
-              <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#7DF9FF] to-[#FF10F0] flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6" fill="none" stroke="#0A0A0F" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-semibold mb-2">Dedicated Team</h3>
-                <p class="text-gray-400">Direct access to senior engineers, designers, and AI specialists.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="glass rounded-3xl p-8 gradient-border">
-          <div class="text-center">
-            <div class="text-6xl font-bold gradient-text mb-2">150+</div>
-            <p class="text-gray-400 mb-8">Projects Delivered</p>
-            <div class="grid grid-cols-2 gap-6">
-              <div>
-                <div class="text-4xl font-bold gradient-text mb-1">99%</div>
-                <p class="text-sm text-gray-400">Client Satisfaction</p>
-              </div>
-              <div>
-                <div class="text-4xl font-bold gradient-text mb-1">24/7</div>
-                <p class="text-sm text-gray-400">Support Available</p>
-              </div>
-              <div>
-                <div class="text-4xl font-bold gradient-text mb-1">48h</div>
-                <p class="text-sm text-gray-400">Average Response</p>
-              </div>
-              <div>
-                <div class="text-4xl font-bold gradient-text mb-1">14</div>
-                <p class="text-sm text-gray-400">Core Services</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Contact Section -->
-  
-    
+    </section>
+
     <section id="case-studies" class="section">
         <div class="container">
             <h2 class="section-title">Client <span class="text-pink">Case Studies</span></h2>
-            <p class="section-subtitle">Real results from real businesses</p>
-            <div class="grid grid-2">
+            <p class="section-subtitle">Real results. *Client names anonymized for privacy</p>
+            <div class="grid grid-3">
                 <div class="glass-card case-card">
                     <div class="case-stat">+340% MQLs</div>
                     <h3>D2C Skincare Brand</h3>
-                    <p>Built AI content engine + automated UGC video pipeline. From 2 posts/week to 14, without hiring.</p>
+                    <p>Built AI content engine + automated UGC video pipeline. From 2 posts/week to 14, without hiring. 60-day rollout.</p>
                     <div class="case-tags"><span>AI Content</span><span>Social Automation</span><span>E-commerce</span></div>
                 </div>
                 <div class="glass-card case-card">
                     <div class="case-stat">22 hrs/week saved</div>
-                    <h3>B2B SaaS Startup</h3>
-                    <p>Custom AI support agent trained on docs + past tickets. CSAT up 18%, team handles 3x volume.</p>
-                    <div class="case-tags"><span>AI Chatbots</span><span>Customer Support</span><span>CRM</span></div>
+                    <h3>B2B SaaS Platform</h3>
+                    <p>Custom AI support agent trained on docs + 50k past tickets. CSAT up 18%, team handles 3x volume with same headcount.</p>
+                    <div class="case-tags"><span>AI Chatbots</span><span>Support</span><span>CRM</span></div>
+                </div>
+                <div class="glass-card case-card">
+                    <div class="case-stat">47 sec response</div>
+                    <h3>Real Estate Group</h3>
+                    <p>AI SDR qualifies inbound leads, books site visits via Calendly, syncs to HubSpot. Was 6-hour manual response time.</p>
+                    <div class="case-tags"><span>Lead Gen</span><span>Automation</span><span>PropTech</span></div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section">
+        <div class="container">
+            <h2 class="section-title">Simple <span class="text-icy">Pricing</span></h2>
+            <p class="section-subtitle">Monthly retainers. Cancel anytime. No surprises.</p>
+            <div class="grid grid-3">
+                <div class="glass-card pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$199<span>/mo</span></div>
+                    <ul class="pricing-features">
+                        <li>1 AI Workflow or Agent</li>
+                        <li>Slack/Email Support</li>
+                        <li>Monthly Strategy Call</li>
+                        <li>Basic Integrations</li>
+                    </ul>
+                    <button class="btn-secondary" data-plan="starter">Get Started</button>
+                </div>
+                <div class="glass-card pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Growth</h3>
+                    <div class="price">$599<span>/mo</span></div>
+                    <ul class="pricing-features">
+                        <li>3 AI Workflows or Agents</li>
+                        <li>Priority Support + Slack</li>
+                        <li>Bi-weekly Strategy Calls</li>
+                        <li>Advanced Integrations</li>
+                        <li>Custom Training</li>
+                    </ul>
+                    <button class="btn-primary" data-plan="growth">Get Started</button>
+                </div>
+                <div class="glass-card pricing-card">
+                    <h3>Scale</h3>
+                    <div class="price">$1,889<span>/mo</span></div>
+                    <ul class="pricing-features">
+                        <li>Unlimited Workflows</li>
+                        <li>24/7 Dedicated Support</li>
+                        <li>Weekly Strategy Calls</li>
+                        <li>Custom AI Development</li>
+                        <li>White-label Options</li>
+                    </ul>
+                    <button class="btn-secondary" data-plan="scale">Get Started</button>
+                </div>
+            </div>
+            <p class="pricing-note">Individual service pricing varies based on your needs. Book a free 30-minute strategy call to get a custom quote.</p>
         </div>
     </section>
 
@@ -737,126 +346,86 @@
         </div>
     </section>
 
-    <section id="contact" class="relative py-24">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl md:text-6xl font-bold mb-6">Let's <span class="gradient-text">Connect</span></h2>
-          <p class="text-xl text-gray-400">Ready to start your next project? Drop us a message.</p>
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Let's <span class="text-icy">Build</span> Together</h2>
+            <p class="section-subtitle">Book a free 30-min strategy call. No pitch, just value.</p>
+            <div class="grid grid-2">
+                <div class="glass-card">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">What do you want to automate?</label>
+                            <textarea id="message" name="message" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%;">Send Message</button>
+                    </form>
+                </div>
+                <div class="glass-card">
+                    <h3>Prefer to talk?</h3>
+                    <p style="margin: 20px 0;">Book directly on my calendar. 30-min slot, no prep needed.</p>
+                    <a href="https://calendly.com/admin-snowvixalabs/30min" class="btn-secondary" target="_blank">Open Calendly →</a>
+                    <div style="margin-top: 40px;">
+                        <h4>Or email directly:</h4>
+                        <p><a href="mailto:admin@snowvixalabs.com" style="color: var(--icy-blue);">admin@snowvixalabs.com</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <div class="glass rounded-3xl p-8 md:p-12">
-          <form id="contactForm" class="space-y-6">
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label for="name" class="block text-sm font-medium text-gray-300 mb-2">Name *</label>
-                <input type="text" id="name" name="name" required class="input-glass w-full px-4 py-3 rounded-lg text-white placeholder-gray-500">
-              </div>
-              <div>
-                <label for="email" class="block text-sm font-medium text-gray-300 mb-2">Email *</label>
-                <input type="email" id="email" name="email" required class="input-glass w-full px-4 py-3 rounded-lg text-white placeholder-gray-500">
-              </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="./logo.jpeg" alt="Snowvixa Labs" class="footer-logo">
+                    <p>Build smart. Scale faster.</p>
+                    <p class="text-muted">Global clients welcome</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <a href="#why">About</a>
+                    <a href="#case-studies">Case Studies</a>
+                    <a href="#blog">Blog</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="./privacy.html">Privacy Policy</a>
+                    <a href="./terms.html">Terms & Conditions</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Connect</h4>
+                    <a href="mailto:admin@snowvixalabs.com">admin@snowvixalabs.com</a>
+                    <a href="#">LinkedIn</a>
+                    <a href="#">X / Twitter</a>
+                </div>
             </div>
-            <div>
-              <label for="company" class="block text-sm font-medium text-gray-300 mb-2">Company</label>
-              <input type="text" id="company" name="company" class="input-glass w-full px-4 py-3 rounded-lg text-white placeholder-gray-500">
+            <div class="footer-bottom">
+                <p>© 2026 Snowvixa Labs. All rights reserved.</p>
             </div>
-            <div>
-              <label for="message" class="block text-sm font-medium text-gray-300 mb-2">Message *</label>
-              <textarea id="message" name="message" rows="5" required class="input-glass w-full px-4 py-3 rounded-lg text-white placeholder-gray-500 resize-none"></textarea>
-            </div>
-            <button type="submit" id="submitBtn" class="btn-primary w-full py-4 rounded-lg text-lg flex items-center justify-center gap-2">
-              <span id="submitText">Send Message</span>
-              <div id="submitSpinner" class="spinner hidden"></div>
-            </button>
-          </form>
-          
-          <div class="mt-8 pt-8 border-t border-gray-800 grid md:grid-cols-3 gap-6 text-center">
-            <div>
-              <p class="text-gray-400 text-sm mb-1">Email Us</p>
-              <a href="mailto:admin@snowvixalabs.com" class="text-[#7DF9FF] hover:text-[#FF10F0] transition">admin@snowvixalabs.com</a>
-            </div>
-            <div>
-              <p class="text-gray-400 text-sm mb-1">Book a Call</p>
-              <button onclick="openCalendly()" class="text-[#7DF9FF] hover:text-[#FF10F0] transition">Schedule Demo</button>
-            </div>
-            <div>
-              <p class="text-gray-400 text-sm mb-1">Location</p>
-              <p class="text-white">Remote Worldwide</p>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Footer -->
-  <footer class="relative py-12 border-t border-gray-800">
-    <div class="container mx-auto px-6 relative z-10">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-        <div class="flex items-center gap-3">
-          <img src="./logo.jpeg" alt="Snowvixa Labs" class="w-8 h-8 rounded-lg object-cover">
-          <span class="text-xl font-bold gradient-text">Snowvixa Labs</span>
-        </div>
-        <p class="text-gray-500 text-sm">© 2024 Snowvixa Labs. All rights reserved.</p>
-        <div class="flex gap-6">
-          <a href="#" class="text-gray-400 hover:text-[#7DF9FF] transition">Privacy</a>
-          <a href="#" class="text-gray-400 hover:text-[#7DF9FF] transition">Terms</a>
-          <a href="mailto:admin@snowvixalabs.com" class="text-gray-400 hover:text-[#7DF9FF] transition">Contact</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-  
-  <script>
-    // Mobile Menu Toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    mobileMenuBtn.addEventListener('click', () => {
-      mobileMenuBtn.classList.toggle('active');
-      mobileMenu.classList.toggle('hidden');
-    });
-    
-    // Close mobile menu on link click
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenuBtn.classList.remove('active');
-        mobileMenu.classList.add('hidden');
-      });
-    });
-    
-    // Toast Notification
-    function showToast(title, message, type = 'success') {
-      const toast = document.getElementById('toast');
-      const toastTitle = document.getElementById('toast-title');
-      const toastMessage = document.getElementById('toast-message');
-      const toastIcon = document.getElementById('toast-icon');
-      
-      toastTitle.textContent = title;
-      toastMessage.textContent = message;
-      
-      if (type === 'success') {
-        toast.className = 'toast success show';
-        toastIcon.innerHTML = '<svg class="w-6 h-6 text-[#7DF9FF]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-      } else {
-        toast.className = 'toast error show';
-        toastIcon.innerHTML = '<svg class="w-6 h-6 text-[#FF10F0]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>';
-      }
-      
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 4000);
-    }
-    
-    // Contact Form Submit
-    const contactForm = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const submitText = document.getElementById('submitText');
-    const submitSpinner = document.getElementById('submitSpinner');
-    
-    contactForm.addEventListener('submit', async (e) => {
+    </footer>
+
+    <script>
+    // Contact form handler
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const btnText = btn.innerHTML;
+      btn.innerHTML = 'Sending...';
+      btn.disabled = true;
       
       const formData = {
         name: document.getElementById('name').value,
@@ -864,124 +433,67 @@
         company: document.getElementById('company').value,
         message: document.getElementById('message').value
       };
-      
-      // Show loading state
-      submitBtn.disabled = true;
-      submitText.textContent = 'Sending...';
-      submitSpinner.classList.remove('hidden');
-      
+
       try {
-        const response = await fetch('/api/contact', {
+        const res = await fetch('/api/contact', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData)
         });
         
-        if (response.ok) {
-          showToast('Success!', 'Your message has been sent. We\'ll get back to you soon.', 'success');
-          contactForm.reset();
+        if (res.ok) {
+          showToast('Message sent! We’ll reply within 24 hours.', 'success');
+          e.target.reset();
         } else {
-          throw new Error('Failed to send message');
+          showToast('Error sending message. Email us: admin@snowvixalabs.com', 'error');
         }
-      } catch (error) {
-        showToast('Error', 'Failed to send message. Please email us at admin@snowvixalabs.com', 'error');
-        console.error('Contact form error:', error);
-      } finally {
-        submitBtn.disabled = false;
-        submitText.textContent = 'Send Message';
-        submitSpinner.classList.add('hidden');
+      } catch (err) {
+        showToast('Network error. Please try again.', 'error');
       }
+      
+      btn.innerHTML = btnText;
+      btn.disabled = false;
     });
-    
-    // Stripe Checkout Handler
-    async function handleCheckout(plan) {
-      try {
-        const response = await fetch('/api/checkout', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ plan: plan })
-        });
-        
-        if (response.ok) {
-          const data = await response.json();
-          if (data.url) {
-            window.location = data.url;
-          } else {
-            showToast('Error', 'Invalid checkout response. Please contact support.', 'error');
-          }
-        } else {
-          throw new Error('Checkout failed');
-        }
-      } catch (error) {
-        showToast('Error', 'Unable to process payment. Please contact admin@snowvixalabs.com', 'error');
-        console.error('Checkout error:', error);
-      }
-    }
-    
-    // Calendly Popup
-    function openCalendly() {
-      // REPLACE WITH YOUR CALENDLY URL
-      Calendly.initPopupWidget({ 
-        url: 'https://calendly.com/admin-snowvixalabs/30min' 
-      });
-      return false;
-    }
-    
-    // Handle success.html redirect
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('success') === 'true') {
-      showToast('Payment Successful!', 'Welcome to Snowvixa Labs. Check your email for next steps.', 'success');
-      // Clean URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-    if (urlParams.get('canceled') === 'true') {
-      showToast('Payment Canceled', 'No charges were made. Feel free to try again.', 'error');
-      window.history.replaceState({}, document.title, window.location.pathname);
-    }
-    
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
+
+    // Stripe checkout
+    document.querySelectorAll('[data-plan]').forEach(btn => {
+      btn.addEventListener('click', async (e) => {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          const headerOffset = 80;
-          const elementPosition = target.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
+        const plan = btn.dataset.plan;
+        const originalText = btn.innerHTML;
+        btn.innerHTML = 'Redirecting...';
+        btn.disabled = true;
+        
+        try {
+          const res = await fetch('/api/checkout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ plan })
           });
+          const data = await res.json();
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            showToast('Stripe error. Email us to get started.', 'error');
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+          }
+        } catch (err) {
+          showToast('Connection error. Check your Stripe setup.', 'error');
+          btn.innerHTML = originalText;
+          btn.disabled = false;
         }
       });
     });
-    
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-    
-    document.querySelectorAll('.glass-hover').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'all 0.6s ease-out';
-      observer.observe(el);
-    });
-  </script>
+
+    // Toast notification
+    function showToast(msg, type) {
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      toast.innerText = msg;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 4000);
+    }
+    </script>
 </body>
 </html>
